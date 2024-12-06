@@ -1,18 +1,48 @@
-//
-//  TabView.swift
-//  Threat App
-//
-//  Created by Abhishek Sehgal on 2024-12-06.
-//
-
 import SwiftUI
 
-struct TabView: View {
+struct TabViewExample: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            // First tab: Feed
+            Text("Feed View")
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    
+                }
+
+            // Second tab: Explore
+            Text("Explore Content")
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                   
+                }
+
+            // Third tab: Notifications
+            Text("Upload Thread")
+                .tabItem {
+                    Image(systemName: "plus")
+                    
+                }
+
+            // Fourth tab: Messages
+            Text("Activity")
+                .tabItem {
+                    Image(systemName: "heart")
+                    
+                }
+
+            // Fifth tab: Profile
+            Text("Profile Content")
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    
+                }
+        }
+        .tint(.black)
     }
 }
 
 #Preview {
-    TabView()
+    TabViewExample()
 }
+
