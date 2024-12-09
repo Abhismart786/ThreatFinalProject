@@ -4,35 +4,35 @@ struct TabViewExample: View {
     var body: some View {
         TabView {
             // First tab: Feed
-            Text("Feed View")
+            FeedView()
                 .tabItem {
                     Image(systemName: "house.fill")
                     
                 }
 
             // Second tab: Explore
-            Text("Explore Content")
+            ExploreView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                    
                 }
 
             // Third tab: Notifications
-            Text("Upload Thread")
+            CreateThreadView()
                 .tabItem {
                     Image(systemName: "plus")
                     
                 }
 
             // Fourth tab: Messages
-            Text("Activity")
+            ActivityView()
                 .tabItem {
                     Image(systemName: "heart")
                     
                 }
 
             // Fifth tab: Profile
-            Text("Profile Content")
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")
                     
