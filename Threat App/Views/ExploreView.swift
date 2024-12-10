@@ -13,9 +13,34 @@ struct ExploreView: View {
         NavigationStack{
             ScrollView{
                 LazyVStack{
-                    
+                    ForEach(0 ... 10, id: \.self)
+                    {
+                        user in
+                        HStack{
+                            Image(systemName: "person.circle")
+                                .scaleEffect(2)
+                                .frame(width: 30,height:40)
+                                .imageScale(.large)
+                                .clipShape(Circle())
+                            VStack(alignment: .leading)
+                            {
+                                Text("Abhishek")
+                                    .fontWeight(.semibold)
+                                
+                                Text("Max Verstappen")
+                            }
+                            .font(.footnote)
+                            Spacer()
+                            Text("Follow")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .frame(width: 100,height: 32)
+                        }
+                    }
+                    .padding(.horizontal)
                 }
             }
+            .navigationTitle("Search")
             .searchable(text: $searchText,prompt: "Search")
         }
     }
