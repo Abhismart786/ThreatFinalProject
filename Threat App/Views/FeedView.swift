@@ -72,7 +72,13 @@ struct FeedView: View {
                         .padding()
                     }
                 }
+                
+                }
+            .refreshable {
+                print("DEBUG: Refresh threads")
             }
+            .navigationTitle("Threads")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
