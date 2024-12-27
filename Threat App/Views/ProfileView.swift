@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var selectedFilter: ProfileThread = .threads
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(spacing: 20){
@@ -47,6 +48,94 @@ struct ProfileView: View {
                         .frame(width: 352,height: 32)
                         .background(.black)
                         .cornerRadius(8)
+                }
+                VStack{
+                    HStack{
+                        ForEach(ProfileThread.allCases){
+                            filter in
+                            VStack{
+                                Text(filter.title)
+                                    .font(.subheadline)
+                                    .fontWeight(selectedFilter == filter ? .semibold: .regular)
+                                if selectedFilter == filter{
+                                    Rectangle()
+                                        .foregroundColor(.black)
+                                        .frame(width:180,height: 1)
+                                }
+                                else{
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: 180,height:1)
+                                }
+                            }
+                            .onTapGesture {
+                                withAnimation(.spring()){
+                                    selectedFilter = filter
+                                }
+                            }
+                        }
+                    }
+                    LazyVStack{
+                        ForEach(0 ... 10, id:\.self){_ in
+                            VStack{
+                                HStack(alignment: .top, spacing: 12){
+                                    Image(systemName: "person.circle")
+                                        .scaleEffect(2)
+                                        .frame(width: 30,height:30)
+                                        .imageScale(.large)
+                                        .clipShape(Circle())
+                                    VStack(alignment: .leading, spacing: 4)
+                                    {
+                                        HStack{
+                                            Text("Abhishek")
+                                                .font(.caption)
+                                                .fontWeight(.semibold)
+                                            
+                                            Spacer()
+                                            
+                                            Button{
+                                                
+                                            }label: {
+                                                Image(systemName: "ellipsis")
+                                                    .foregroundColor(Color(.darkGray))
+                                            }
+                                        }
+                                        Text("You are the best")
+                                            .font(.footnote)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        HStack(spacing: 16)
+                                        {
+                                            Button{
+                                                
+                                            }label: {
+                                                Image(systemName: "heart")
+                                            }
+                                            Button{
+                                                
+                                            }label: {
+                                                Image(systemName: "bubble.right")
+                                            }
+                                            Button{
+                                                
+                                            }label: {
+                                                Image(systemName: "arrow.rectanglepath")
+                                            }
+                                            Button{
+                                                
+                                            }label: {
+                                                Image(systemName: "paperplane")
+                                            }
+                                        }
+                                        .foregroundColor(.black)
+                                        .padding(.vertical,8)
+                                    }
+                                }
+                                Divider()
+                            }
+                            .padding()
+                        }
+                    }
                 }
             }
             
