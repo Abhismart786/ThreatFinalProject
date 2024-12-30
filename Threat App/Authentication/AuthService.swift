@@ -7,7 +7,12 @@
 
 import FirebaseAuth
 class AuthService{
+    
+    @Published var userSession: FirebaseAuth.User?  // used to check the user loged in or not
     static let shared = AuthService()
+    init(){
+        self.userSession = Auth.auth().currentUser
+    }
     @MainActor
     func login(withEmail email:String,password: String) async throws{
         

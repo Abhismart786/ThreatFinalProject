@@ -6,17 +6,34 @@
 //
 
 import SwiftUI
-
+import Combine
+import FirebaseAuth
 struct ContentView: View {
+    @StateObject var viewModel = ContentViewModel()
     var body: some View {
-        VStack {
-            LoginView()
-                        
+        Group{
+            if viewModel.userSession != nil {
+                TabViewExample()
+            }
+            else{
+                LoginView()
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+}
+
+class ContentViewModel: ObservableObject{
+    @Published var userSession: FirebaseAuth.User?
+    init(){
+        setupSubscribers()
+    }
+    private func setupSubscribers(){
+        AuthService.shared.$userSession.sink {
+            [weak self] userSession in self?.userSession = userSession
+        }
+    }
 }
