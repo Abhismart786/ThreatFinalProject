@@ -25,7 +25,7 @@ struct CreateThreadView: View {
                         TextField("Start a thread...",text:   $caption,axis: .vertical)
                     }.font(.footnote)
                     Spacer()
-                    if !caption.isEmpty{
+                    
                         Button{
                             caption = ""
                         }label: {
@@ -33,7 +33,7 @@ struct CreateThreadView: View {
                                 .resizable()
                                 .frame(width: 12,height: 12)
                                 .foregroundColor(.gray)
-                        }
+                        
                     }
                 }
                 Spacer()
@@ -52,7 +52,8 @@ struct CreateThreadView: View {
                 {
                     Button("Post"){
                         
-                    } .font(.subheadline)
+                    }
+                    .font(.subheadline)
                       .fontWeight(.semibold)
                       .foregroundColor(.black)
                 }
