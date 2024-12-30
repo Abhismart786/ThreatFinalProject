@@ -1,4 +1,7 @@
 import SwiftUI
+import os.log
+
+
 
 struct CreateThreadView: View {
     @State private var caption = ""
@@ -8,6 +11,7 @@ struct CreateThreadView: View {
         NavigationStack {
             VStack {
                 HStack(alignment: .top) {
+                    
                     Image(systemName: "person.circle")
                         .scaleEffect(2)
                         .frame(width: 30, height: 30)
@@ -42,6 +46,7 @@ struct CreateThreadView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
+                        print("Cancle button pressed")
                         dismiss() // Dismiss the current view
                     }
                     .font(.subheadline)

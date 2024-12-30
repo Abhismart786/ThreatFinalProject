@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RegistrationView: View {
+    @State private var viewModel = RegView()
     @State private var email = ""
     @State private var password = ""
     @State private var fullname = ""
@@ -51,7 +52,9 @@ struct RegistrationView: View {
                     .padding(.horizontal,24)
             }
             Button{
-                
+                Task{
+                    try await viewModel.createUser()
+                }
             }label: {
                 Text("Sign up")
                     .font(.subheadline)
