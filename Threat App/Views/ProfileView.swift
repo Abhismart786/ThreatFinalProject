@@ -18,26 +18,31 @@ struct ProfileView: View {
                     {
                         VStack(alignment: .leading, spacing: 4)
                         {
-                            Text("Abhishek Sehgal")
+                            Text("  Abhishek Sehgal")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             
-                            Text("abhishek_sehgal")
+                            Text("   abhishek_sehgal")
                                 .font(.subheadline)
                         }
-                        Text("Never Give up!")
+                        
+                        Text("    Never Give up!")
                             .font(.footnote)
-                        Text("10 followers")
+        
+                        Text("    10 followers")
                             .font(.caption)
                             .foregroundColor(.gray)
+                        
                     }
+                    
                     Spacer()
                     Image(systemName: "person.circle")
                         .scaleEffect(2)
                         .frame(width: 30,height:40)
                         .imageScale(.large)
                         .clipShape(Circle())
-                }
+                }.padding(6)
+                
                 Button{
                     
                 }label: {
