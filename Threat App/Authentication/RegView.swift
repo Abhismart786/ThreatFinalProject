@@ -7,8 +7,13 @@
 
 import Foundation
 class RegView: ObservableObject{
+    
+    @Published var email = ""
+    @Published  var password = ""
+    @Published  var fullname = ""
+    @Published var username = ""
     @MainActor
     func createUser() async throws{
-        print("DEBUG: Create user here..")
+        try await AuthService.shared.createUser(withEmail: email, password: password, fullname: fullname, username: username)
     }
 }
