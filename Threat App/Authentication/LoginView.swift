@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
+    
+    @State var viewModel = LogView()
+    @State private var isLoginSuccessful = false
     var body: some View {
         
         NavigationStack{
@@ -21,14 +22,14 @@ struct LoginView: View {
                     .frame(width: 120,height: 120)
                     .padding()
                 VStack {
-                    TextField("Enter your email", text : $email)
+                    TextField("Enter your email", text : $viewModel.email)
                         .font(.subheadline)
                         .padding(12)
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
                         .padding(.horizontal,24)
                     
-                    SecureField("Enter your password", text: $password)
+                    SecureField("Enter your password", text: $viewModel.password)
                         .font(.subheadline)
                         .padding(12)
                         .background(Color(.systemGray6))
@@ -38,7 +39,14 @@ struct LoginView: View {
             }
             .padding()
             Button{
-                
+                Task {
+                    do {
+                        try await viewModel.login()
+                        isLoginSuccessful = true
+                        } catch {
+                            print("Login failed: \(error)")
+                                }
+                        }
             }label: {
                 Text("Login")
                     .font(.subheadline)
@@ -70,4 +78,14 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+}
+class LogView: ObservableObject{
+    
+    @Published var email = ""
+    @Published  var password = ""
+    
+    @MainActor
+    func login() async throws{
+        try await AuthService.shared.login(withEmail: email, password: password)
+    }
 }
