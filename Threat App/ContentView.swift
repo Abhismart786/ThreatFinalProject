@@ -22,6 +22,7 @@ struct ContentView: View {
                 Button(action: {
                     showMapView.toggle()  // Toggle the state to show map
                 }) {
+                    
                     Text("Show Map View")
                         .padding()
                         .background(Color.black)
