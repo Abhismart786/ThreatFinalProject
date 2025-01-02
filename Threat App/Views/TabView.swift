@@ -1,7 +1,9 @@
 import SwiftUI
-
+import MapKit
 struct TabViewExample: View {
     @State private var showCreateThreadView = false
+    @State private var coordinate = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+    @State private var address: String = "" 
     @State private var selectedTab = 0
     var body: some View {
         TabView(selection:$selectedTab){
@@ -48,6 +50,7 @@ struct TabViewExample: View {
                     
                 }
                 .onAppear{selectedTab = 4}
+           
         }
         .tint(.black)
     }
