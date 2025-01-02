@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 struct ProfileView: View {
+    @StateObject var viewModel = ProfileViewModel()
     @State private var selectedFilter: ProfileThread = .threads
     var body: some View {
         NavigationStack{
@@ -162,4 +163,17 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
+}
+class ProfileViewModel: ObservableObject{
+    private var cancellables = Set<AnyCancellable>()
+    @Published var currentUser: User?
+    init(){
+        setup()
+    }
+    private func setup(){
+        UserService.shared.$currentUser.sink{
+            [weak self] user in
+            self?.currentUser = user
+        }.store(in: &cancellables)
+    }
 }
