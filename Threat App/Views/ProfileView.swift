@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 struct ProfileView: View {
     @State private var selectedFilter: ProfileThread = .threads
     var body: some View {
