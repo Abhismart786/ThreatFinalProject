@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct EditProfileView: View {
+    let user: User
     @State private var bio = ""
     @State private var link = ""
     @State private var isPrivateProfile = false
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = EditProfileViewModel()
     var body: some View {
         NavigationStack{
             ZStack{
@@ -22,7 +24,7 @@ struct EditProfileView: View {
                         VStack(alignment:.leading){
                             Text("Name")
                                 .fontWeight(.semibold)
-                            Text("Abhishek Sehgal")
+                            Text(user.fullname)
                         }
                         .font(.footnote)
                         Spacer()
@@ -66,7 +68,8 @@ struct EditProfileView: View {
                 }
                 ToolbarItem(placement:.navigationBarTrailing){
                     Button("Done"){
-                        
+                        Task{ try await viewModel.updateUserData()}
+                        dismiss()
                     }.font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
@@ -77,5 +80,10 @@ struct EditProfileView: View {
 }
 
 #Preview {
-    EditProfileView()
+    EditProfileView(user: dev.user)
+}
+class EditProfileViewModel: ObservableObject{
+    func updateUserData() async throws{
+       
+    }
 }

@@ -68,7 +68,10 @@ struct CurrentUserProfileView: View {
                                     .stroke(Color(.systemGray4),lineWidth: 1)
                             }
                     }
-                    .sheet(isPresented: $showEditProfile, content:{ EditProfileView()})
+                    .sheet(isPresented: $showEditProfile, content:{
+                        if let user = currentUser{
+                            EditProfileView(user: user)}})
+                    
                     VStack{
                         HStack{
                             ForEach(ProfileThread.allCases){
