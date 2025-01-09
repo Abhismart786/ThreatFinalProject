@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ExploreView: View {
     @State private var searchText = ""
+    @StateObject var viewModel = ExporeViewModel()
     var body: some View {
         NavigationStack{
             ScrollView{
                 LazyVStack{
-                    ForEach(0 ... 10, id: \.self)
+                    ForEach(viewModel.users)
                     {
                         user in
                         VStack {
@@ -53,4 +54,14 @@ struct ExploreView: View {
 
 #Preview {
     ExploreView()
+}
+
+class ExporeViewModel: ObservableObject{
+    @Published var users = [User]()
+    init(){
+        Task {try await fetchUsers()}
+    }
+    private func fetchUsers() async throws{
+        self.users = try await UserService.fetchUsers()
+    }
 }

@@ -33,6 +33,7 @@ class UserService{
         self.currentUser = user
     
     }
+    //function used to populate data in current user login
     static func fetchUsers() async throws ->[User]{
         guard let currentUid = Auth.auth().currentUser?.uid else {return []}
         let snapshot = try await Firestore.firestore().collection("users").getDocuments()
