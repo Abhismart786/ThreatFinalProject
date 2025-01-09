@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-struct User: Identifiable,Codable{
+struct User: Identifiable,Codable,Hashable{
     let id: String
     let fullname: String
     let email: String
@@ -17,6 +17,8 @@ struct User: Identifiable,Codable{
     var profileImage: String?
     let password: String
 }
+
+
 class UserService{
     @Published var currentUser: User?
     static let shared = UserService()

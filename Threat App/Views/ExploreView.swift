@@ -18,26 +18,28 @@ struct ExploreView: View {
                     ForEach(viewModel.users)
                     {
                         user in
-                        VStack {
-                            HStack{
-                                Image(systemName: "person.circle")
-                                    .scaleEffect(2)
-                                    .frame(width: 30,height:40)
-                                    .imageScale(.large)
-                                    .clipShape(Circle())
-                                VStack(alignment: .leading)
-                                {
-                                    Text(user.username)
+                        NavigationLink(value: user){
+                            VStack {
+                                HStack{
+                                    Image(systemName: "person.circle")
+                                        .scaleEffect(2)
+                                        .frame(width: 30,height:40)
+                                        .imageScale(.large)
+                                        .clipShape(Circle())
+                                    VStack(alignment: .leading)
+                                    {
+                                        Text(user.username)
+                                            .fontWeight(.semibold)
+                                        
+                                        Text(user.fullname)
+                                    }
+                                    .font(.footnote)
+                                    Spacer()
+                                    Text("Follow")
+                                        .font(.subheadline)
                                         .fontWeight(.semibold)
-                                    
-                                    Text(user.fullname)
+                                        .frame(width: 100,height: 32)
                                 }
-                                .font(.footnote)
-                                Spacer()
-                                Text("Follow")
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .frame(width: 100,height: 32)
                             }
                         }
                         .padding(.horizontal)
@@ -46,7 +48,9 @@ struct ExploreView: View {
                     .padding(.vertical,4)
                     
                 }
+                
             }
+            .navigationDestination(for: User.self, destination: {user in ProfileView(user:user)})
             .navigationTitle("Search")
             .searchable(text: $searchText,prompt: "Search")
         }

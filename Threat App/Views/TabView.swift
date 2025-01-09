@@ -44,7 +44,7 @@ struct TabViewExample: View {
                 .onAppear{selectedTab = 3}
 
             // Fifth tab: Profile
-            ProfileView()
+            CurrentUserProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")
                     

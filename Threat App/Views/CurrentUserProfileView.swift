@@ -1,24 +1,23 @@
 //
-//  ProfileView.swift
+//  CurrentUserProfileView.swift
 //  Threat App
 //
-//  Created by Abhishek Sehgal on 2024-12-09.
+//  Created by Abhishek Sehgal on 2025-01-09.
 //
 
 import SwiftUI
 import Combine
-let dev = Dev(user: User(id: "12345", fullname: "Abhishek Sehgal", email: "abhishek@domain.com", username: "@abhishekrsehgal", bio: "Swift enthusiast", profileImage: nil, password: "password"))
-struct Dev {
-    let user: User
-}
 
-struct ProfileView: View {
-    let user:User
+struct CurrentUserProfileView: View {
+   
+    @StateObject var viewModel = CurrentUserProfileViewModel()
     @State private var selectedFilter: ProfileThread = .threads
     
-    
+    private var currentUser: User?{
+        return viewModel.currentUser
+    }
     var body: some View {
-       
+        NavigationStack{
             ScrollView(showsIndicators: false){
                 VStack(spacing: 20){
                     HStack(alignment: .top)
@@ -27,15 +26,15 @@ struct ProfileView: View {
                         {
                             VStack(alignment: .leading, spacing: 4)
                             {
-                                Text(user.fullname)
+                                Text(currentUser?.fullname ?? "")
                                     .font(.title2)
                                     .fontWeight(.semibold)
                                 
-                                Text(user.username)
+                                Text(currentUser?.username ?? "")
                                     .font(.subheadline)
                             }
                             
-                            if let bio = user.bio{
+                            if let bio = currentUser?.bio{
                                 Text(bio).font(.footnote)
                             }
                                 
@@ -164,16 +163,16 @@ struct ProfileView: View {
                 }
                 
             }
-        
-        .padding(.horizontal)
+        }
     }
 }
 
 #Preview {
-    ProfileView(user: dev.user)
+    CurrentUserProfileView()
 }
-class ProfileViewModel: ObservableObject{
+class CurrentUserProfileViewModel: ObservableObject{
     private var cancellables = Set<AnyCancellable>()
+    
     @Published var currentUser: User?
     init(){
         setup()
