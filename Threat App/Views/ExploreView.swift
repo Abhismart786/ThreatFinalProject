@@ -11,6 +11,7 @@ struct ExploreView: View {
     @State private var searchText = ""
     @StateObject var viewModel = ExporeViewModel()
     var body: some View {
+        let users : User
         NavigationStack{
             ScrollView{
                 LazyVStack{
@@ -26,10 +27,10 @@ struct ExploreView: View {
                                     .clipShape(Circle())
                                 VStack(alignment: .leading)
                                 {
-                                    Text("Abhishek")
+                                    Text(user.username)
                                         .fontWeight(.semibold)
                                     
-                                    Text("Max Verstappen")
+                                    Text(user.fullname)
                                 }
                                 .font(.footnote)
                                 Spacer()
@@ -55,12 +56,13 @@ struct ExploreView: View {
 #Preview {
     ExploreView()
 }
-
+//fetching users from database
 class ExporeViewModel: ObservableObject{
     @Published var users = [User]()
     init(){
         Task {try await fetchUsers()}
     }
+    @MainActor
     private func fetchUsers() async throws{
         self.users = try await UserService.fetchUsers()
     }
