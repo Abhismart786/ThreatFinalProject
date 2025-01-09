@@ -10,6 +10,10 @@ import Combine
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State private var selectedFilter: ProfileThread = .threads
+    
+    private var currentUser: User?{
+        return viewModel.currentUser
+    }
     var body: some View {
         NavigationStack{
             ScrollView(showsIndicators: false){
@@ -20,23 +24,24 @@ struct ProfileView: View {
                         {
                             VStack(alignment: .leading, spacing: 4)
                             {
-                                Text("  Abhishek Sehgal")
+                                Text(currentUser?.fullname ?? "")
                                     .font(.title2)
                                     .fontWeight(.semibold)
                                 
-                                Text("   abhishek_sehgal")
+                                Text(currentUser?.username ?? "")
                                     .font(.subheadline)
                             }
                             
-                            Text("    Never Give up!")
-                                .font(.footnote)
-            
+                            if let bio = currentUser?.bio{
+                                Text(bio).font(.footnote)
+                            }
+                                
                             Text("    10 followers")
                                 .font(.caption)
                                 .foregroundColor(.gray)
                             
                         }
-                        
+                        .padding(.horizontal)
                         Spacer()
                         Image(systemName: "person.circle")
                             .scaleEffect(2)
