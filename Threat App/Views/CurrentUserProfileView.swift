@@ -12,6 +12,7 @@ struct CurrentUserProfileView: View {
    
     @StateObject var viewModel = CurrentUserProfileViewModel()
     @State private var selectedFilter: ProfileThread = .threads
+    @State private var showEditProfile = false
     
     private var currentUser: User?{
         return viewModel.currentUser
@@ -53,7 +54,7 @@ struct CurrentUserProfileView: View {
                     }.padding(6)
                     
                     Button{
-                        
+                        showEditProfile.toggle()
                     }label: {
                         Text("Edit Profile")
                             .font(.subheadline)
@@ -67,6 +68,7 @@ struct CurrentUserProfileView: View {
                                     .stroke(Color(.systemGray4),lineWidth: 1)
                             }
                     }
+                    .sheet(isPresented: $showEditProfile, content:{ EditProfileView()})
                     VStack{
                         HStack{
                             ForEach(ProfileThread.allCases){

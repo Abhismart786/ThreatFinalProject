@@ -11,6 +11,7 @@ struct EditProfileView: View {
     @State private var bio = ""
     @State private var link = ""
     @State private var isPrivateProfile = false
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack{
             ZStack{
@@ -59,7 +60,7 @@ struct EditProfileView: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
                     Button("Cancel"){
-                        
+                        dismiss()
                     }.font(.subheadline)
                         .foregroundColor(.black)
                 }
