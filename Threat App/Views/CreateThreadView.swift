@@ -22,7 +22,7 @@ struct CreateThreadView: View {
                         .clipShape(Circle())
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Hello World")
+                        Text(user?.username ?? "")
                             .fontWeight(.semibold)
                         
                         TextField("Start a thread...", text: $caption, axis: .vertical)
