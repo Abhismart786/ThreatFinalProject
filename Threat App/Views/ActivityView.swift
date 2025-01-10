@@ -1,89 +1,43 @@
-//
-//  ActivityView.swift
-//  Threat App
-//
-//  Created by Abhishek Sehgal on 2024-12-09.
-//
-
 import SwiftUI
 
 struct ActivityView: View {
     
-    // Sample data model for activities
+    // Step 1: Sample data model for activities
     struct Activity: Identifiable {
-        var id = UUID()
-        var type: ActivityType
-        var description: String
-        var timestamp: Date
+        var id = UUID()  // Unique identifier for each activity
+        var description: String // Description of the activity
     }
     
-    enum ActivityType: String {
-        case post = "Post"
-        case comment = "Comment"
-        case like = "Like"
-        case follow = "Follow"
-    }
-    
-    // Sample activity data
-    @State private var activities: [Activity] = [
-        Activity(type: .post, description: "You posted a new update.", timestamp: Date().addingTimeInterval(-3600)),
-        Activity(type: .comment, description: "You commented on a post.", timestamp: Date().addingTimeInterval(-7200)),
-        Activity(type: .like, description: "You liked a photo.", timestamp: Date().addingTimeInterval(-10800)),
-        Activity(type: .follow, description: "You followed Shubham.", timestamp: Date().addingTimeInterval(-14400)),
+    // Step 2: Sample activity data (could be static or dynamic from a server)
+    let activities: [Activity] = [
+        Activity(description: "You posted a new update."),
+        Activity(description: "You commented on a post."),
+        Activity(description: "You liked a photo."),
+        Activity(description: "You followed Shubham."),
     ]
     
     var body: some View {
+        // Step 3: Create a simple List to display activities
         NavigationStack {
             VStack {
+                // Title for the Activity View
                 Text("Your Activity")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding()
+                    .font(.title2) // Set font size for title
+                    .fontWeight(.bold) // Make title bold
+                    .padding() // Add padding around the title
                 
-                List(activities.sorted(by: { $0.timestamp > $1.timestamp })) { activity in
-                    HStack {
-                        Image(systemName: getActivityIcon(for: activity.type))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.black)
-                        
-                        VStack(alignment: .leading) {
-                            Text(activity.description)
-                                .font(.body)
-                            
-                            Text("\(activity.timestamp, formatter: activityDateFormatter)")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    .padding(.vertical, 8)
+                // List to show each activity's description
+                List(activities) { activity in
+                    Text(activity.description)
+                        .font(.body) // Set font size for description
                 }
-                .listStyle(PlainListStyle())
             }
-            .navigationBarTitle("Activity", displayMode: .inline)
+            .navigationBarTitle("Activity", displayMode: .inline) // Set the title of the screen in the navigation bar
         }
-    }
-    
-    // Function to return the icon based on activity type
-    func getActivityIcon(for type: ActivityType) -> String {
-        switch type {
-        case .post: return "square.and.pencil"
-        case .comment: return "bubble.left.and.bubble.right.fill"
-        case .like: return "heart.fill"
-        case .follow: return "person.fill.checkmark"
-        }
-    }
-    
-    // Date Formatter for timestamps
-    private var activityDateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
     }
 }
 
 #Preview {
     ActivityView()
 }
+
