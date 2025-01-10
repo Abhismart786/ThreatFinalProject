@@ -4,9 +4,12 @@ import os.log
 
 
 struct CreateThreadView: View {
+    @StateObject var viewModel = CreateThreadViewModel()
     @State private var caption = ""
     @Environment(\.dismiss) var dismiss
-    
+    private var user: User?{
+        return UserService.shared.currentUser
+    }
     var body: some View {
         NavigationStack {
             VStack {
@@ -55,7 +58,8 @@ struct CreateThreadView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Post") {
-                        
+                        Task {try await viewModel.uploadThread(caption: caption)
+                        dismiss()}
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)
