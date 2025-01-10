@@ -5,7 +5,7 @@ struct ForgotPasswordView: View {
     @State private var email = ""
     @State private var resetStatusMessage = ""
     @State private var isSuccess = false
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
             Spacer()
@@ -54,18 +54,23 @@ struct ForgotPasswordView: View {
             
             Divider()
             
-            Button {
-                // Navigate back to the LoginView
-            } label: {
-                HStack {
-                    Text("Remember your password?")
-                    Text("Sign In")
-                        .fontWeight(.black)
-                }
-                .foregroundColor(.black)
-                .font(.footnote)
-            }
         }
+       
+       
+        
+        .navigationTitle("Forget Password")
+        .navigationBarItems(leading: Button(action: {
+            dismiss()  // Dismiss the view when back button is tapped
+        }) {
+            HStack {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.black)// Back arrow icon
+                Text("Back")
+                    .foregroundColor(.black)// Text for the back button
+            }
+        })
+        
+        
     }
     
     private func resetPassword() async {
@@ -83,6 +88,7 @@ struct ForgotPasswordView: View {
             resetStatusMessage = "Failed to send password reset email: \(error.localizedDescription)"
             isSuccess = false
         }
+        
     }
 }
 

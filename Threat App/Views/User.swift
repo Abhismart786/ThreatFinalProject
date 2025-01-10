@@ -14,8 +14,9 @@ struct User: Identifiable,Codable,Hashable{
     let email: String
     let username: String
     var bio: String?
-    var profileImage: String?
+   
     let password: String
+    var link: String?
 }
 
 

@@ -7,10 +7,6 @@
 
 import SwiftUI
 import Combine
-let dev = Dev(user: User(id: "12345", fullname: "Abhishek Sehgal", email: "abhishek@domain.com", username: "@abhishekrsehgal", bio: "Swift enthusiast", profileImage: nil, password: "password"))
-struct Dev {
-    let user: User
-}
 
 struct ProfileView: View {
     let user:User
@@ -159,6 +155,11 @@ struct ProfileView: View {
         .padding(.horizontal)
     }
 }
+let dev = Dev(user: User(id: "12345", fullname: "Abhishek Sehgal", email: "abhishek@domain.com", username: "@abhishekrsehgal", bio: "Swift enthusiast",  password: "password"))
+struct Dev {
+    let user: User
+}
+
 
 #Preview {
     ProfileView(user: dev.user)

@@ -77,7 +77,7 @@ struct LoginView: View {
                            } label: {
                                Text("Forgot Password?")
                                    .font(.footnote)
-                                   .foregroundColor(.blue)
+                                   .foregroundColor(.black)
                                    .padding(.top, 10)
                            }
                        

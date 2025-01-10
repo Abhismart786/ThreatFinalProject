@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FeedView: View {
     let user: User
-    @StateObject var viewModel = FeedViewModel()
+    
     var body: some View {
         NavigationStack{
             ScrollView(showsIndicators: false){
@@ -77,7 +77,7 @@ struct FeedView: View {
                 
                 }
             .refreshable {
-                Task {try await viewModel.fetchThreads()}
+                
             }
             .navigationTitle("Threads")
             .navigationBarTitleDisplayMode(.inline)
@@ -88,14 +88,4 @@ struct FeedView: View {
 #Preview {
     FeedView(user:dev.user)
 }
-@MainActor
-class FeedViewModel: ObservableObject{
-    @Published var threads = [Thread]()
-    
-    init(){
-        Task { try await fetchThreads()}
-    }
-    func fetchThreads() async throws{
-        self.threads = try await ThreadService.fetchThreads()
-    }
-}
+
