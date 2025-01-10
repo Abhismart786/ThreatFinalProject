@@ -8,7 +8,7 @@ struct TabViewExample: View {
     var body: some View {
         TabView(selection:$selectedTab){
             // First tab: Feed
-            FeedView()
+            FeedView(user: dev.user)
                 .tabItem {
                     Image(systemName:selectedTab == 0 ? "house.fill" : "house")
                     

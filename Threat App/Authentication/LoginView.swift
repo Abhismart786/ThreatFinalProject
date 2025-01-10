@@ -72,6 +72,15 @@ struct LoginView: View {
                 .font(.footnote)
             }
             .padding(.vertical,16)
+            NavigationLink {
+                               ForgotPasswordView() // Navigate to Forgot Password view
+                           } label: {
+                               Text("Forgot Password?")
+                                   .font(.footnote)
+                                   .foregroundColor(.blue)
+                                   .padding(.top, 10)
+                           }
+                       
         }
     }
 }
