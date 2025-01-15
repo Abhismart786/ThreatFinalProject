@@ -4,8 +4,8 @@ import FirebaseFirestore
 class AuthService {
     
     @Published var userSession: FirebaseAuth.User?  // used to check if the user is logged in or not
-    static let shared = AuthService()
-    
+    static let shared = AuthService()//shared is used to use make keyword globally to use in the project
+    // constructor used to check the authorization
     init() {
         self.userSession = Auth.auth().currentUser
     }

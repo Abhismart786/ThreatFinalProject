@@ -1,9 +1,4 @@
-//
-//  Thread.swift
-//  Threat App
-//
-//  Created by Abhishek Sehgal on 2025-01-10.
-//
+
 
 import Firebase
 import Foundation
@@ -16,11 +11,13 @@ struct Thread: Identifiable,Codable{
     let timestamp: Timestamp
    
     var likes: Int
+    // function used to generate unique id
     var id:String{
         return threadId ?? NSUUID().uuidString
     }
     var user: User?
 }
+// Service class responsible for interacting with Firestore to upload threads
 class CreateThreadViewModel: ObservableObject{
     
     func uploadThread(caption:String) async throws{

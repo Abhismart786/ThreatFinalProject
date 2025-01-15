@@ -1,12 +1,7 @@
-//
-//  CurrentUserProfileView.swift
-//  Threat App
-//
-//  Created by Abhishek Sehgal on 2025-01-09.
-//
+
 
 import SwiftUI
-import Combine
+import Combine // it is a frame work that is used to handle all the events that changes accoreding to actions of the user.
 
 struct CurrentUserProfileView: View {
    
@@ -15,7 +10,7 @@ struct CurrentUserProfileView: View {
     @State private var showEditProfile = false
     
     private var currentUser: User?{
-        return viewModel.currentUser
+        return viewModel.currentUser // viewmodel is used when we update the value and it is automatically change
     }
     var body: some View {
         NavigationStack{
@@ -180,7 +175,7 @@ struct CurrentUserProfileView: View {
     CurrentUserProfileView()
 }
 class CurrentUserProfileViewModel: ObservableObject{
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()//it is used to manage memory when we delete the value from viewmodel by using cancllable it also removed from memory
     
     @Published var currentUser: User?
     init(){
